@@ -9,8 +9,6 @@ services:
     container_name: app
     restart: unless-stopped
     tty: true
-    env_file:
-      - ./src/.env
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
