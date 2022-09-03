@@ -9,6 +9,8 @@ services:
     container_name: app
     restart: unless-stopped
     tty: true
+    env_file:
+      - ./src/.env
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
@@ -28,7 +30,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     volumes:
       - ./src:/var/www/html
       - ./nginx/conf.d:/etc/nginx/conf.d
@@ -43,12 +44,9 @@ services:
     tty: true
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_DATABASE: laravel_web
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+    env_file:
+      - ./mysql/.env
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
@@ -63,4 +61,3 @@ networks:
 #Volumes
 volumes:
   dbdata:
-    driver: local
