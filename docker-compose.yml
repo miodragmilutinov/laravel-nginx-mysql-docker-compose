@@ -27,7 +27,7 @@ services:
     tty: true
     ports:
       - "80:80"
-      - "443:443"
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     volumes:
       - ./src:/var/www/html
       - ./nginx/conf.d:/etc/nginx/conf.d
@@ -42,7 +42,6 @@ services:
     tty: true
     ports:
       - "3306:3306"
-      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     env_file:
       - ./mysql/.env
     volumes:
