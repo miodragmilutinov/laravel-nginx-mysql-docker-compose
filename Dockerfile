@@ -46,6 +46,4 @@ RUN chown -R www-data:www-data \
                              /var/www/html/storage \
                              /var/www/html/bootstrap/cache
 
-# Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
-EXPOSE 9000 5173
 CMD ["php-fpm"]

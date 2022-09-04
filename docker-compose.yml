@@ -18,6 +18,9 @@ services:
       - ./php/laravel.ini:/user/local/etc/php/app.conf/laravel.ini
     networks:
       - app-network
+    ports:
+      - "9000:9000"
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
 
   #Nginx Service
   webserver:
