@@ -18,6 +18,9 @@ services:
       - ./php/laravel.ini:/user/local/etc/php/app.conf/laravel.ini
     networks:
       - app-network
+    ports:
+      - "9000:9000"
+      - "5173:5173"
 
   #Nginx Service
   webserver:
@@ -27,7 +30,6 @@ services:
     tty: true
     ports:
       - "80:80"
-      - "3000:3000"
     volumes:
       - ./src:/var/www/html
       - ./nginx/conf.d:/etc/nginx/conf.d
