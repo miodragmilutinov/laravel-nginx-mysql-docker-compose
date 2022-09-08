@@ -1,4 +1,3 @@
-FROM node:latest AS node
 FROM php:8.1-fpm-buster
 
 # Copy composer.lock and composer.json into the working directory
@@ -6,10 +5,6 @@ COPY src/composer.lock src/composer.json /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html/
-
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /usr/local/bin/node /usr/local/bin/node
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 # Install dependencies for the operating system software
 RUN apt-get update && apt-get install -y \
